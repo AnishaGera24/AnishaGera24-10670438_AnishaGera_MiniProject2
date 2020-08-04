@@ -1,0 +1,59 @@
+<!-- <p>contact works!</p> -->
+<div class="fa fa-address-book" style="font-size: 24px;" style="text-align: center;" >
+       Phone Book App
+
+<div >
+    <b style="text-align: left;">Contacts</b>
+    <button (click)="toggle()" style="text-align: right;"> {{buttonName}}</button>
+    <ng-container *ngIf="show">
+        <div>
+            <div>
+                <input type="text" class="form-control"  required [(ngModel)]="contact.FirstName" #fname="ngModel"  placeholder="Enter first name" >
+                <div [hidden]="fname.valid || fname.pristine" class="alert alert-danger">
+                    FirstName is required
+                </div>
+            </div>
+            <div>
+                <input type="text" class="form-control" required [(ngModel)]="contact.LastName" #lname="ngModel"  placeholder="Enter last name" >
+                <div [hidden]="lname.valid || lname.pristine" class="alert alert-danger">
+                    LastName is required
+                </div>
+            </div>
+            <div>
+                <input type="number" class="form-control" required [(ngModel)]="contact.PhoneNum" #num="ngModel"  placeholder="Enter phone num">
+                <div [hidden]="num.valid || num.pristine" class="alert alert-danger">
+                    Number is required
+                </div>
+            </div>
+            <div>
+                <button type="button" (click)="showContact()" class="btn btn-primary" style="background: lightpink;">Create</button>
+            </div>
+        </div>
+    </ng-container>
+</div>
+
+<div id="sec">
+    <form id="searchform" [formGroup]="contactSearch">
+    <input type="text" class="fa fa-search" formControlName="search"  placeholder="Search for contact by last name">
+    <button class="btn btn-success" (click)="searchcontact()" style="text-align: right;"><i class="fa fa-search"></i></button>
+    <button (click)="sortcontact()" >Sort</button>
+    </form>
+    <div id="up" *ngFor ="let searchcont of searchedcontacts">
+    {{searchcont.FirstName}} {{searchcont.LastName}}
+    <br>
+    {{searchcont.PhoneNum}}
+    <br>
+    </div>
+</div>
+<div *ngFor="let contact of contacts">  
+    <div class="column" >
+     {{contact.FirstName}} {{contact.LastName}}
+    <br/>
+    <i class="fa fa-phone" style="font-size:17px"></i>
+    {{contact.PhoneNum}}
+    <button (click)="deletecontact(contact)" class="fa fa-trash-o"  style="font-size:18px"></button> 
+    </div> 
+<hr/>
+</div>
+</div>
+
